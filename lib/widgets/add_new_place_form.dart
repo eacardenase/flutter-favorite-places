@@ -1,3 +1,4 @@
+import 'package:favorite_places/widgets/image_input.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,6 +55,10 @@ class _NewPlaceFormState extends ConsumerState<NewPlaceForm> {
                 _enteredTitle = newValue!.trim();
               },
             ),
+            const SizedBox(
+              height: 16,
+            ),
+            const ImageInput(),
             const SizedBox(
               height: 16,
             ),
