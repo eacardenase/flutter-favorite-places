@@ -1,9 +1,12 @@
-import 'package:favorite_places/models/place.dart';
-import 'package:favorite_places/screens/add_place.dart';
-import 'package:favorite_places/widgets/places_list.dart';
 import 'package:flutter/material.dart';
 
-class PlacesScreen extends StatelessWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:favorite_places/screens/add_place.dart';
+import 'package:favorite_places/widgets/places_list.dart';
+import 'package:favorite_places/providers/user_places.dart';
+
+class PlacesScreen extends ConsumerWidget {
   const PlacesScreen({
     super.key,
   });
@@ -17,8 +20,8 @@ class PlacesScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final List<Place> _places = [];
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userPlaces = ref.watch(userPlacesProvider);
 
     Widget mainContent = Center(
       child: Text(
@@ -29,8 +32,8 @@ class PlacesScreen extends StatelessWidget {
       ),
     );
 
-    if (_places.isNotEmpty) {
-      mainContent = PlacesList(places: _places);
+    if (userPlaces.isNotEmpty) {
+      mainContent = PlacesList(places: userPlaces);
     }
 
     return Scaffold(

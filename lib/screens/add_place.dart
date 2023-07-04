@@ -1,5 +1,6 @@
-import 'package:favorite_places/widgets/add_new_place_form.dart';
 import 'package:flutter/material.dart';
+
+import 'package:favorite_places/widgets/add_new_place_form.dart';
 
 class AddPlaceScreen extends StatelessWidget {
   const AddPlaceScreen({
