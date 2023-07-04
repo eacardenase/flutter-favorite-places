@@ -26,6 +26,12 @@ class PlacesList extends StatelessWidget {
         final currentPlace = places[index];
 
         return ListTile(
+          leading: CircleAvatar(
+            radius: 26,
+            backgroundImage: FileImage(
+              currentPlace.image,
+            ),
+          ),
           title: Text(
             currentPlace.title,
             style: Theme.of(context)
