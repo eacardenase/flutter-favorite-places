@@ -22,7 +22,7 @@ class _ImageInputState extends State<ImageInput> {
   void _takePicture() async {
     final imagePicker = ImagePicker();
     final pickedImage = await imagePicker.pickImage(
-      source: ImageSource.camera,
+      source: ImageSource.gallery,
       maxWidth: 600,
     );
 
@@ -30,9 +30,7 @@ class _ImageInputState extends State<ImageInput> {
       return;
     }
 
-    setState(() {
-      _selectedImage = File(pickedImage.path);
-    });
+    setState(() => _selectedImage = File(pickedImage.path));
 
     widget.onPickImage(_selectedImage!);
   }
@@ -41,7 +39,7 @@ class _ImageInputState extends State<ImageInput> {
   Widget build(BuildContext context) {
     Widget mainContent = TextButton.icon(
       icon: const Icon(
-        Icons.camera,
+        Icons.camera_enhance,
       ),
       label: const Text(
         'Take Picture',

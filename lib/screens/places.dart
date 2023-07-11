@@ -34,10 +34,13 @@ class PlacesScreen extends ConsumerWidget {
 
     if (userPlaces.isNotEmpty) {
       mainContent = Padding(
-          padding: const EdgeInsets.all(
-            8,
-          ),
-          child: PlacesList(places: userPlaces));
+        padding: const EdgeInsets.all(
+          8,
+        ),
+        child: PlacesList(
+          places: userPlaces,
+        ),
+      );
     }
 
     return Scaffold(

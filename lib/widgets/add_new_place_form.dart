@@ -24,17 +24,17 @@ class _NewPlaceFormState extends ConsumerState<NewPlaceForm> {
   void _savePlace() {
     final isValid = _formKey.currentState!.validate();
 
-    if (isValid || _selectedImage != null) {
-      _formKey.currentState!.save();
-
-      print(_selectedImage);
-
-      ref
-          .read(userPlacesProvider.notifier)
-          .addPlace(_enteredTitle, _selectedImage!);
-
-      Navigator.of(context).pop();
+    if (!isValid || _selectedImage == null) {
+      return;
     }
+
+    _formKey.currentState!.save();
+
+    ref
+        .read(userPlacesProvider.notifier)
+        .addPlace(_enteredTitle, _selectedImage!);
+
+    Navigator.of(context).pop();
   }
 
   void _onPickImage(File image) {
@@ -70,7 +70,7 @@ class _NewPlaceFormState extends ConsumerState<NewPlaceForm> {
             height: 16,
           ),
           ImageInput(
-            onPickImage: (image) => _onPickImage(image),
+            onPickImage: _onPickImage,
           ),
           const SizedBox(
             height: 16,
