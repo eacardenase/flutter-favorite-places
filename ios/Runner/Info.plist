@@ -32,6 +32,8 @@
 	<string>Take your favorite place image.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Pick your favorite place image.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The location for your favorite place.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
