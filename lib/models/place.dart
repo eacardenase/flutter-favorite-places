@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:uuid/uuid.dart';
 
+import 'package:favorite_places/env/env.dart';
+
 const uuid = Uuid();
 
 class PlaceLocation {
@@ -14,6 +16,10 @@ class PlaceLocation {
   final double latitude;
   final double longitude;
   final String address;
+
+  String get locationImage {
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$latitude,$longitude&key=${Env.googleMapsApiKey}';
+  }
 }
 
 class Place {

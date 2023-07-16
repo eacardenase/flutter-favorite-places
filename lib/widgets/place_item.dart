@@ -28,6 +28,13 @@ class PlaceItem extends StatelessWidget {
             .titleMedium!
             .copyWith(color: Theme.of(context).colorScheme.onBackground),
       ),
+      subtitle: Text(
+        currentPlace.location.address,
+        style: Theme.of(context)
+            .textTheme
+            .bodySmall!
+            .copyWith(color: Theme.of(context).colorScheme.onBackground),
+      ),
       onTap: () => onPlaceSelected(context, currentPlace),
     );
   }
