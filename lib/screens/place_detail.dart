@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:favorite_places/models/place.dart';
+import 'package:favorite_places/screens/map.dart';
 
 class PlaceDetail extends StatelessWidget {
   const PlaceDetail({
@@ -9,6 +10,17 @@ class PlaceDetail extends StatelessWidget {
   });
 
   final Place place;
+
+  void _openMap(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MapScreen(
+          location: place.location,
+          isSelecting: false,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +44,13 @@ class PlaceDetail extends StatelessWidget {
             right: 0,
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 70,
-                  backgroundImage: NetworkImage(
-                    place.location.locationImage,
+                GestureDetector(
+                  onTap: () => _openMap(context),
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundImage: NetworkImage(
+                      place.location.locationImage,
+                    ),
                   ),
                 ),
                 Container(
