@@ -6,10 +6,17 @@ import 'package:favorite_places/screens/add_place.dart';
 import 'package:favorite_places/widgets/places_list.dart';
 import 'package:favorite_places/providers/user_places.dart';
 
-class PlacesScreen extends ConsumerWidget {
+class PlacesScreen extends ConsumerStatefulWidget {
   const PlacesScreen({
     super.key,
   });
+
+  @override
+  ConsumerState<PlacesScreen> createState() => _PlacesScreenState();
+}
+
+class _PlacesScreenState extends ConsumerState<PlacesScreen> {
+  late Future<void> _placesFuture;
 
   void _addPlace(BuildContext context) {
     Navigator.of(context).push(
@@ -20,7 +27,14 @@ class PlacesScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+
+    _placesFuture = ref.read(userPlacesProvider.notifier).loadPlaces();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final userPlaces = ref.watch(userPlacesProvider);
 
     Widget mainContent = Center(
@@ -37,8 +51,19 @@ class PlacesScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(
           8,
         ),
-        child: PlacesList(
-          places: userPlaces,
+        child: FutureBuilder(
+          future: _placesFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return PlacesList(
+              places: userPlaces,
+            );
+          },
         ),
       );
     }
